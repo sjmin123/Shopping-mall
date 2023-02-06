@@ -1,0 +1,2 @@
+rootProject.name = 'sjm'
+include 'sjmBatch'

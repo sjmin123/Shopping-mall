@@ -1,0 +1,34 @@
+spring:
+  batch:
+    job:
+      #이건 실행시 arguments 에다 시작할 배치 이름 넣었을 때 실행되는 배치를 설정하는 부분
+      #그래서 job.names:과 arguments 가 같아야 한다.
+      names : ${job.names:NONE}
+    jdbc:
+      #메타데이터테이블 자동생성
+      initialize-schema : always
+  jpa:
+    show-sql: true
+    hibernate:
+      #자동으로 entity 에 등록된 테이블 생성.
+      ddl-auto: update
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${USER_ID}
+    password: ${USER_PWD}
+    properties:
+      mail:
+        smtp:
+          socketFactory.class: javax.net.ssl.SSLSocketFactory
+          auth: true
+          starttls:
+            enable: true
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/sjmpractice?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
+    username: root
+    password: ${DB_PWD}
+

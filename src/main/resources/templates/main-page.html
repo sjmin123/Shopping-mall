@@ -1,0 +1,31 @@
+<!DOCTYPE>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>main</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Song+Myung&display=swap" rel="stylesheet">
+    <style>
+        {
+            }
+    </style>
+</head>
+<body>
+<center>
+    <h1>상점</h1>
+    <h2></h2>
+    <table>
+        <tr><th>상품명</th><th>상품가격</th><th>구매하기</th></tr>
+        <tr th:each="product : ${productList}">
+            <form action="/payment" method="post">
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.price}">원</td>
+            <input type="hidden" th:value="${product.id}" th:name="productId">
+            <td><button type="submit" value="구매하기"></button></td>
+            </form>
+        </tr>
+    </table>
+</center>
+</body>
+</html>
