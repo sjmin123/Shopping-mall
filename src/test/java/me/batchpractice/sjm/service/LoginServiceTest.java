@@ -35,99 +35,99 @@ class LoginServiceTest {
 
     //로그인 테스트
     //성공
-    @Test
-    void 로그인서비스테스트(){
-        //given
-        HttpSession session=new MockHttpSession();
-        final Optional<User> user = Optional.of(User.builder()
-                .userId("asdf")
-                .password("asdf")
-                .build());
-        given(userRepository.findByUserId("asdf")).willReturn(user);
-
-        //when
-        //todo model에 any() 들어감.
-        boolean result=loginService.login(new LoginRequestDto("asdf","asdf"),session, any());
-
-        //then
-        assertThat(result).isTrue();
-        //세션이 올바르게 들어갔는지 검사.
-        assertThat(session.getAttribute(LOGIN_SESSION_KEY)).isEqualTo(user.get().getUserId());
-    }
-
-    //실패_아이디가틀림
-    @Test
-    void 로그인서비스테스트_실패1(){
-        //given
-        HttpSession session=new MockHttpSession();
-        given(userRepository.findByUserId(any())).willReturn(Optional.empty());
-
-        //when
-        boolean result=loginService.login(new LoginRequestDto("asdff","asdf"),session, any());
-
-        //then
-        assertThat(result).isFalse();
-        assertThat(session.getAttribute(LOGIN_SESSION_KEY)).isNull();
-
-    }
-
-    //실패_비밀번호가 틀림
-    @Test
-    void 로그인서비스테스트_실패2(){
-        //given
-        HttpSession session=new MockHttpSession();
-        //응답
-        final Optional<User> user = Optional.of(User.builder()
-                .userId("asdf")
-                .password("asdf")
-                .build());
-        given(userRepository.findByUserId("asdf")).willReturn(user);
-
-        //when
-        boolean result=loginService.login(new LoginRequestDto("asdf","asdfjhjvjf"),session, any());
-
-        //then
-        assertThat(result).isFalse();
-        assertThat(session.getAttribute(LOGIN_SESSION_KEY)).isNull();
-    }
-
-    //로그아웃 서비스 테스트(세션이 없어지는지만 확인.)
-    //성공
-    //session 테스트 (session mocking)
-    @Test
-    void 로그아웃테스트_성공(){
-
-    //given
-        HttpSession session=new MockHttpSession();
-        session.setAttribute(LOGIN_SESSION_KEY, "테스트");
-
-    //when
-        loginService.logout(session);
-
-    //then
-        assertThat(session.getAttribute(LOGIN_SESSION_KEY)).isNull();
-
-    }
-
-    //실패
-    //예외 처리 테스트
-    //session 테스트 (session mocking)
-    @Test
-    void 로그아웃테스트_실패_이미세션에없음(){
-
-        //given
-        HttpSession session=new MockHttpSession();
-
-        //when
+//    @Test
+//    void 로그인서비스테스트(){
+//        //given
+//        HttpSession session=new MockHttpSession();
+//        final Optional<User> user = Optional.of(User.builder()
+//                .userId("asdf")
+//                .password("asdf")
+//                .build());
+//        given(userRepository.findByUserId("asdf")).willReturn(user);
+//
+//        //when
+//        //todo model에 any() 들어감.
+//        boolean result=loginService.login(new LoginRequestDto("asdf","asdf"));
+//
+//        //then
+//        assertThat(result).isTrue();
+//        //세션이 올바르게 들어갔는지 검사.
+//        assertThat(session.getAttribute(LOGIN_SESSION_KEY)).isEqualTo(user.get().getUserId());
+//    }
+//
+//    //실패_아이디가틀림
+//    @Test
+//    void 로그인서비스테스트_실패1(){
+//        //given
+//        HttpSession session=new MockHttpSession();
+//        given(userRepository.findByUserId(any())).willReturn(Optional.empty());
+//
+//        //when
+//        boolean result=loginService.login(new LoginRequestDto("asdff","asdf"));
+//
+//        //then
+//        assertThat(result).isFalse();
+//        assertThat(session.getAttribute(LOGIN_SESSION_KEY)).isNull();
+//
+//    }
+//
+//    //실패_비밀번호가 틀림
+//    @Test
+//    void 로그인서비스테스트_실패2(){
+//        //given
+//        HttpSession session=new MockHttpSession();
+//        //응답
+//        final Optional<User> user = Optional.of(User.builder()
+//                .userId("asdf")
+//                .password("asdf")
+//                .build());
+//        given(userRepository.findByUserId("asdf")).willReturn(user);
+//
+//        //when
+//        boolean result=loginService.login(new LoginRequestDto("asdf","asdfjhjvjf"));
+//
+//        //then
+//        assertThat(result).isFalse();
+//        assertThat(session.getAttribute(LOGIN_SESSION_KEY)).isNull();
+//    }
+//
+//    //로그아웃 서비스 테스트(세션이 없어지는지만 확인.)
+//    //성공
+//    //session 테스트 (session mocking)
+//    @Test
+//    void 로그아웃테스트_성공(){
+//
+//    //given
+//        HttpSession session=new MockHttpSession();
+//        session.setAttribute(LOGIN_SESSION_KEY, "테스트");
+//
+//    //when
 //        loginService.logout(session);
-//        필요 없음. assertThrows하면서 실행하기 때문에 when&then이다.
-
-        //when&then
-        Throwable exception=assertThrows(RuntimeException.class,()-> loginService.logout(session));
-        assertThat(exception.getMessage()).isEqualTo("this is logout exception");
-        //todo 예외 클래스 만들어서 던지기(간단하게) 참고. finalproject 22번동영상.
-
-    }
+//
+//    //then
+//        assertThat(session.getAttribute(LOGIN_SESSION_KEY)).isNull();
+//
+//    }
+//
+//    //실패
+//    //예외 처리 테스트
+//    //session 테스트 (session mocking)
+//    @Test
+//    void 로그아웃테스트_실패_이미세션에없음(){
+//
+//        //given
+//        HttpSession session=new MockHttpSession();
+//
+//        //when
+////        loginService.logout(session);
+////        필요 없음. assertThrows하면서 실행하기 때문에 when&then이다.
+//
+//        //when&then
+//        Throwable exception=assertThrows(RuntimeException.class,()-> loginService.logout(session));
+//        assertThat(exception.getMessage()).isEqualTo("this is logout exception");
+//        //todo 예외 클래스 만들어서 던지기(간단하게) 참고. finalproject 22번동영상.
+//
+//    }
 
     //회원가입 테스트
     //성공

@@ -32,3 +32,10 @@ spring:
     username: root
     password: ${DB_PWD}
 
+#  devtools:
+#    livereload:
+#      enabled: true
+#    restart:
+#      enabled: true
+#  thymeleaf:
+#    cache: false

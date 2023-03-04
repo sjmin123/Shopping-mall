@@ -1,21 +1,28 @@
-<!DOCTYPE html>
+<!DOCTYPE>
 <html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/styles.css">
 <head>
     <meta charset="UTF-8">
     <title>signup</title>
 </head>
+
 <body>
 <center>
-    <h1>회원가입</h1>
+<div class="bigbox">
+    <h1>회원가입</h1><br><br>
     <form th:action="@{/sign-up}" method="post">
-        <h2>아이디</h2>
+        <div class="smallbox">아이디</div>
         <input type="text" name="id" ><br>
-        <h2>비밀번호</h2>
+        <br>
+        <div class="smallbox">비밀번호</div>
         <input type="password" name="password" ><br>
-        <h2>이메일</h2>
+        <br>
+        <div class="smallbox">이메일</div>
         <input type="text" name="email" ><br>
+        <br><br>
         <input type="submit" value="회원가입">
+    </form>
+</div>
 </center>
-</form>
 </body>
 </html>

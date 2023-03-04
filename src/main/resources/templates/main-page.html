@@ -6,27 +6,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Song+Myung&display=swap" rel="stylesheet">
-    <style>
-        {
-            }
-    </style>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 <center>
-    <h1>상점</h1>
-    <h2></h2>
+    <div class="bigbox">
+    <h1>쇼핑몰</h1>
+        <br><br>
     <table>
-        <tr><th>상품명</th><th>상품가격</th><th>구매하기</th></tr>
+        <tr><th>상품명</th><th>상품가격</th><th>구매</th></tr>
         <tr th:each="product : ${productList}">
             <form action="/payment" method="post">
             <td th:text="${product.name}"></td>
-            <td th:text="${product.price}">원</td>
+            <td th:text="${product.price}"></td>
             <input type="hidden" th:value="${product.id}" th:name="productId">
-            <td><button type="submit" value="구매하기"></button></td>
+            <td><button class="purchase" type="submit" value="구매하기">구매</button></td>
             </form>
         </tr>
-    </table>
-    <button onclick="/logout">로그아웃</button>
+    </table><br><br>
+        <form th:action="@{/logout}" method="post">
+        <input type="submit" class="logout" value="로그아웃">
+        </form>
+    </div>
 </center>
 </body>
 </html>

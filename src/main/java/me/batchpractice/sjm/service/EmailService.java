@@ -45,7 +45,7 @@ public class EmailService {
             //제목
             helper.setSubject("오늘 하루 결제 총 금액");
             //내용(process 는 view 화면을 보내는 것.)
-            helper.setText(dailyPaymentBillStuff+" 고객님께서 구매하신 오늘의 결제 금액은 총"
+            helper.setText(dailyPaymentBillStuff.getUserId()+" 고객님께서 구매하신 오늘의 결제 금액은 총"
                     + dailyPaymentBillStuff.getDaily_payment() + "입니다."
             );
         };
